@@ -22,4 +22,4 @@ tgcrypto
 youtube-search
 youtube-search-python
 git+https://github.com/yt-dlp/yt-dlp.git
-pymongo==2.0.106
+pymongo==4.3.3
