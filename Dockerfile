@@ -1,9 +1,19 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs18
-RUN apt-get update -y && apt-get upgrade -y \
-    && apt-get install -y --no-install-recommends ffmpeg \
-    && apt-get clean \
+FROM python:3.10-slim
+
+RUN apt-get update && apt-get install -y \
+    ntpdate \
+    tzdata \
+    git \
+    ffmpeg \
     && rm -rf /var/lib/apt/lists/*
-COPY . /app/
-WORKDIR /app/
-RUN pip3 install --no-cache-dir --upgrade --requirement requirements.txt
-CMD bash start
+
+ENV TZ=Asia/Kolkata
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD bash -c "ntpdate -u time.cloudflare.com; python -m YukkiMusic"
