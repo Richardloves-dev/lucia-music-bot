@@ -7,9 +7,9 @@
 #
 # All rights reserved.
 
+import asyncio
 import time
 import pyrogram.session
-pyrogram.session.Session.MAX_RETRIES = 10
 
 original_start = pyrogram.session.Session.start
 
@@ -19,14 +19,12 @@ async def patched_start(self, *args, **kwargs):
             return await original_start(self, *args, **kwargs)
         except Exception as e:
             if "BadMsgNotification" in str(e):
-                time.sleep(2)
+                await asyncio.sleep(3)
                 continue
             raise
 
 pyrogram.session.Session.start = patched_start
-import os
-os.environ["TZ"] = "Asia/Kolkata"
-import asyncio
+
 import importlib
 import sys
 
