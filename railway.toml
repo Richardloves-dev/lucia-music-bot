@@ -1,2 +1,2 @@
 [deploy]
-startCommand = "ntpdate -u pool.ntp.org || true && python -m YukkiMusic"
+startCommand = "python -m YukkiMusic"
