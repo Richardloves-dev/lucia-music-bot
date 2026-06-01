@@ -7,6 +7,8 @@
 #
 # All rights reserved.
 
+import os
+os.environ["TZ"] = "Asia/Kolkata"
 import asyncio
 import importlib
 import sys
