@@ -1,7 +1,7 @@
 FROM python:3.10-slim
 
 RUN apt-get update && apt-get install -y \
-    ntpdate \
+    ntpsec-ntpdate \
     tzdata \
     git \
     ffmpeg \
@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD bash -c "ntpdate -u time.cloudflare.com; python -m YukkiMusic"
+CMD bash -c "ntpsec-ntpdate -u time.cloudflare.com; python -m YukkiMusic"
